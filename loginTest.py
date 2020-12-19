@@ -4,12 +4,9 @@ from selenium import webdriver
 
 class LoginTest(unittest.TestCase):
     def setUp(self):
-        
+        driver.get("http://localhost:3001")
 
-
-
-driver.get("http://localhost:3001")
-
+    
 usernameText = driver.find_element_by_id("user_name")
 usernameText.clear
 usernameText.send_keys("username")
