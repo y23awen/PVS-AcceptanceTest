@@ -18,7 +18,7 @@ loginButton.click()
 
 time.sleep(1)
 
-driver.get_current_url()
+# driver.get_current_url()
 
 
 driver.close()
