@@ -10,28 +10,39 @@ def step_impl(context):
 @when(u'I click the create project card')
 def step_impl(context):
     context.browser.clickCreateProjectCard()
-    # raise NotImplementedError(u'STEP: When I click the add project card')
 
 
 @when(u'I fill project name as <{projectName}>')
 def step_impl(context, projectName):
     context.browser.inputProjectName(projectName)
-    # raise NotImplementedError(u'STEP: When I fill project name as <projectName>')
 
 
-@when(u'I fill url as <{url}>')
-def step_impl(context, url):
-    context.browser.inputProjectUrl(url)
-    # raise NotImplementedError(u'STEP: When I fill url as <url>')
+@when(u'I fill github url as <{githubUrl}>')
+def step_impl(context, githubUrl):
+    context.browser.inputGithubRepositoryUrl(githubUrl)
+
+
+@when(u'I fill sonarqube url as <{sonarUrl}>')
+def step_impl(context, sonarUrl):
+    context.browser.inputSonarRepositoryUrl(sonarUrl)
+
 
 
 @when(u'I click the create button')
 def step_impl(context):
     context.browser.clickCreateProjectButton()
-    # raise NotImplementedError(u'STEP: When I click the create button')
 
 
-@then(u'I should see the project I just created')
+@then(u'I should see the project name as <{projectName}> I just created')
+def step_impl(context, projectName):
+    assert context.browser.getProjectCard(projectName) is not None
+
+@then(u'I should see the alert with message <{errorMessage}> and I accept it')
+def step_impl(context, errorMessage):
+    context.browser.acceptInputErrorAlert(errorMessage)
+  
+
+@then(u'I should see the alert and I accept it')
 def step_impl(context):
-    assert context.browser.getProjectCard('react') is not None
-    # raise NotImplementedError(u'STEP: Then I should see the project I just created')
+    context.browser.acceptInputErrorAlertWithoutCheckingMessage()
+  

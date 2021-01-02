@@ -1,2 +1,2 @@
 def after_scenario(context, scenario):
-    context.browser.wait(5)
+    context.browser.wait(1)
