@@ -5,14 +5,15 @@ Feature: View Commit Chart
           And I go to PVS
           And I log in
 
-    Scenario Outline: User view project introduction
-        Given I have added a project <ProjectName> with github repository url <url>
-         When I enter the commit page of the <ProjectName> project
-         Then I see a loading animation
-         Then the loading animation disappear
-         Then I see project name with <ProjectName>
+    Scenario: User view project introduction
+        Given I click the create project card
+          And I fill project name as <PVS_react>
+          And I fill github url as <https://github.com/imper0502/pvs-web>
+          And I click the create button
+         When I enter the dashboard page of the <PVS_react> project
+         Then I see project name with <PVS_react>
 
-        Examples:
-            | ProjectName   | url                                       |
-            | PVS-react     |https://github.com/imper0502/pvs-web       |
-            | PVS-springboot|https://github.com/imper0502/pvs-springboot|
+        # Examples:
+        #     | ProjectName   | githubUrl                                       |
+        #     | PVS-react     |https://github.com/imper0502/pvs-web       |
+        #     | PVS-springboot|https://github.com/imper0502/pvs-springboot|

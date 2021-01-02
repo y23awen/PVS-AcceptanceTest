@@ -29,6 +29,12 @@ class Browser():
     def enterSelectProjectPage(self):
         self.driver.get("http://localhost:3002/select")
 
+    def enterProjectDashboardPage(self, projectName):
+        wait = WebDriverWait(self.driver, 10)
+        projectCard = wait.until(EC.presence_of_element_located((By.XPATH, f"//button[.//*[text()='{projectName}']]"))) 
+        sleep(5)
+        projectCard.click()
+
     def clickCreateProjectCard(self):
         wait = WebDriverWait(self.driver, 10)        
         addProjectButton =  wait.until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="create-project-card"]')))
@@ -68,7 +74,7 @@ class Browser():
 
     def getProjectCard(self, projectName):
         wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, f'//*[text()=\'{projectName}\']')))
+        return wait.until(EC.presence_of_element_located((By.XPATH, f'//*[text()=\'{projectName}\']')))
 
     def wait(self, time):
         sleep(time)

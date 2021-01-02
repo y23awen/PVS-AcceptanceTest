@@ -3,14 +3,11 @@ from behave import given, when, then
 @given(u'I\'m on the select project page')
 def step_impl(context):
     pass
-    # context.browser.enterSelectProjectPage()
-    # raise NotImplementedError(u'STEP: Given I\'m on the select project page')
 
 
 @when(u'I click the create project card')
 def step_impl(context):
     context.browser.clickCreateProjectCard()
-
 
 @when(u'I fill project name as <{projectName}>')
 def step_impl(context, projectName):
