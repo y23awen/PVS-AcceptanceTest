@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from time import sleep
 
 class Browser():
@@ -25,11 +26,8 @@ class Browser():
 
         loginButton = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/header/button')
         loginButton.click()
-    
-    def enterSelectProjectPage(self):
-        self.driver.get("http://localhost:3002/select")
 
-    def enterProjectDashboardPage(self, projectName):
+    def clickProjectCard(self, projectName):
         wait = WebDriverWait(self.driver, 10)
         projectCard = wait.until(EC.presence_of_element_located((By.XPATH, f"//button[.//*[text()='{projectName}']]"))) 
         sleep(5)
