@@ -11,7 +11,7 @@ class Browser():
         self.driver = webdriver.Chrome()
 
     def openPVS(self):
-        self.driver.get("http://localhost:3002")
+        self.driver.get("http://localhost:3001")
 
     
     def login(self):
