@@ -74,7 +74,55 @@ class Browser():
 
     def getProjectCard(self, projectName):
         wait = WebDriverWait(self.driver, 10)
-        return wait.until(EC.presence_of_element_located((By.XPATH, f'//*[text()=\'{projectName}\']')))
+        return wait.until(EC.presence_of_element_located((By.XPATH, f"(//button[.//*[text()='{projectName}']])[last()]")))
+
+    def getEnteredProjectName(self, projectName):
+        wait = WebDriverWait(self.driver, 10)
+        return wait.until(EC.presence_of_element_located((By.XPATH, f"//h2[text()='{projectName}']")))
+
+    def getSidebarItem(self, buttonName):
+        wait = WebDriverWait(self.driver, 10)
+        return wait.until(EC.presence_of_element_located((By.XPATH, f"//*[@role='button' and .//*[text()='{buttonName}']]")))
+
+    def isSidebarItemExist(self, buttonName):
+        try:
+            self.driver.find_element_by_xpath(f"//*[@role='button' and .//*[text()='{buttonName}']]")
+            return True
+        except NoSuchElementException:
+            return False
+
+    def isLoadingAnimationShowing(self):
+        wait = WebDriverWait(self.driver, 10)
+        loadingAnimation = self.driver.find_element_by_xpath(f"//div[contains(@class, 'MuiBackdrop-root')]")
+        try:
+            wait.until(EC.visibility_of(loadingAnimation))
+            return True
+        except TimeoutException:
+            return False
+
+    def isLoadingAnimationDisappear(self):
+        wait = WebDriverWait(self.driver, 10)
+        loadingAnimation = self.driver.find_element_by_xpath(f"//div[contains(@class, 'MuiBackdrop-root')]")
+        try:
+            wait.until(EC.invisibility_of_element(loadingAnimation))
+            return True
+        except TimeoutException:
+            return False
+
+    def isChartExist(self, githubType, title):
+        try:
+            titleElement = self.driver.find_element_by_xpath(f"//h1[text()='{title}']")
+            titleAndChart = self.driver.find_element_by_xpath(f"//*[@id='{title.lower()}-{githubType}-chart']")
+            return True
+        except NoSuchElementException:
+            return False
+
+    def isDropdownWithValueExist(self, value):
+        try:
+            self.driver.find_element_by_xpath(f"//div[./div[contains(@class, 'MuiSelect-selectMenu')] and ./input[@value='{value}']]")
+            return True
+        except NoSuchElementException:
+            return False
 
     def wait(self, time):
         sleep(time)
