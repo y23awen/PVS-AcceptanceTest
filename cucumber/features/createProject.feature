@@ -47,7 +47,7 @@ Feature: Create Project
          Then I should see the project name as <PVS_web> I just created
 
 
-    Scenario: Create a project with right github and wrong sonarqube repository
+    Scenario: Create a project with correct github and wrong sonarqube repository
         Given I'm on the select project page
          When I click the create project card
           And I fill project name as <PVS_web> 
@@ -56,7 +56,7 @@ Feature: Create Project
           And I click the create button
          Then I should see the alert with message <sonar error> and I accept it   
 
-    Scenario: Create a project with wrong github and right sonarqube repository
+    Scenario: Create a project with wrong github and correct sonarqube repository
         Given I'm on the select project page
          When I click the create project card
           And I fill project name as <PVS_web> 
