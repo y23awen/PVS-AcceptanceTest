@@ -39,17 +39,20 @@ class Browser():
         addProjectButton.click()
 
     def inputProjectName(self, projectName):
-        projectNameText = self.driver.find_element_by_xpath('//*[@id="ProjectName"]')
+        wait = WebDriverWait(self.driver, 10)        
+        projectNameText =  wait.until(EC.presence_of_element_located((By.XPATH, f'//*[@id="ProjectName"]')))
         projectNameText.clear()
         projectNameText.send_keys(projectName)
 
     def inputGithubRepositoryUrl(self, url):
-        projectUrlText = self.driver.find_element_by_xpath('//*[@id="GithubRepositoryURL"]')
+        wait = WebDriverWait(self.driver, 10)        
+        projectUrlText =  wait.until(EC.presence_of_element_located((By.XPATH, f'//*[@id="GithubRepositoryURL"]')))
         projectUrlText.clear()
         projectUrlText.send_keys(url)
 
     def inputSonarRepositoryUrl(self, url):
-        projectUrlText = self.driver.find_element_by_xpath('//*[@id="SonarRepositoryURL"]')
+        wait = WebDriverWait(self.driver, 10)        
+        projectUrlText =  wait.until(EC.presence_of_element_located((By.XPATH, f'//*[@id="SonarRepositoryURL"]')))
         projectUrlText.clear()
         projectUrlText.send_keys(url)
 
@@ -107,10 +110,30 @@ class Browser():
         except TimeoutException:
             return False
 
-    def isChartExist(self, githubType, title):
+    def isGithubChartExist(self, chartType, title):
         try:
             titleElement = self.driver.find_element_by_xpath(f"//h1[text()='{title}']")
-            titleAndChart = self.driver.find_element_by_xpath(f"//*[@id='{title.lower()}-{githubType}-chart']")
+            titleAndChart = self.driver.find_element_by_xpath(f"//*[@id='{title.lower()}-{chartType}-chart']")
+            return True
+        except NoSuchElementException:
+            return False
+
+    def isSonarChartExist(self, chartType, title):
+        try:
+            titleElement = self.driver.find_element_by_xpath(f"//h1[text()='{title}']")
+            titleAndChart = self.driver.find_element_by_xpath(f"//*[@id='{chartType.lower().replace(' ','-')}-chart']")
+            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+            print(f"//h1[text()='{title}']")
+            print(f"//*[@id='{chartType.lower().replace(' ','-')}-chart']")
+            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+           
+            return True
+        except NoSuchElementException:
+            return False
+
+    def isNumberExist(self):
+        try:
+            NumberElement = self.driver.find_element_by_xpath(f"//*[@id='number-of-sonar']")
             return True
         except NoSuchElementException:
             return False

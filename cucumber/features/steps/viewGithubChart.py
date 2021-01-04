@@ -63,9 +63,9 @@ def step_impl(context):
 def step_impl(context):
     assert context.browser.isLoadingAnimationDisappear() is True
 
-@then(u'I see a <{githubType}> chart with title <{title}>')
-def step_impl(context, githubType, title):
-    assert context.browser.isChartExist(githubType, title) is True
+@then(u'I see a <{chartType}> chart with title <{title}>')
+def step_impl(context, chartType, title):
+    assert context.browser.isGithubChartExist(chartType, title) is True
 
 @then(u'I see a dropdown with default value <{value}>')
 def step_impl(context, value):
