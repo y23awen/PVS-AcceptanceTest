@@ -122,10 +122,8 @@ class Browser():
         try:
             titleElement = self.driver.find_element_by_xpath(f"//h1[text()='{title}']")
             titleAndChart = self.driver.find_element_by_xpath(f"//*[@id='{chartType.lower().replace(' ','-')}-chart']")
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
             print(f"//h1[text()='{title}']")
             print(f"//*[@id='{chartType.lower().replace(' ','-')}-chart']")
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
            
             return True
         except NoSuchElementException:
@@ -144,6 +142,32 @@ class Browser():
             return True
         except NoSuchElementException:
             return False
+
+    def clickAddRepositoryButton(self, projectName):
+        wait = WebDriverWait(self.driver, 10)        
+        addRepositoryIcon = wait.until(EC.element_to_be_clickable((By.XPATH, f"(.//button[@aria-label='Add Repository' and //p[text()='{projectName}']])[last()]")))
+        addRepositoryIcon.click()
+
+
+    def fillAddRepositoryUrl(self, repositoryUrl):
+        wait = WebDriverWait(self.driver, 10)        
+        RepositoryUrlText =  wait.until(EC.presence_of_element_located((By.XPATH, f"//*[@id='RepositoryURL']")))
+        RepositoryUrlText.clear()
+        RepositoryUrlText.send_keys(repositoryUrl)
+
+
+    def clickAddRepositoryCreateButton(self):
+        wait = WebDriverWait(self.driver, 10)        
+        createButton = wait.until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="AddRepositoryBtn"]')))
+        createButton.click()
+
+    def isSonarIconExist(self, projectName):
+        try: 
+            SonarIcon = self.driver.find_element_by_xpath(f"(.//button[@aria-label='SonarQube' and //p[text()='{projectName}']])[last()]")
+            return True
+        except NoSuchElementException:
+            return False
+
 
     def wait(self, time):
         sleep(time)

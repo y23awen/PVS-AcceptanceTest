@@ -55,7 +55,7 @@ Feature: View Project With Only SonarQube Repository
          Then I see project name with <PVS_react_2>
           And I see the chart title <Bugs>, the number of SonarQube type, and the <Bugs> chart
 
-    Scenario: User view Github Code Smells chart
+    Scenario: User view SonarQube Code Smells chart
         Given I click the create project card
           And I fill project name as <PVS_react_2>
           And I fill sonarqube url as <http://140.124.181.143:9000/dashboard?id=pvs-react>
@@ -65,7 +65,7 @@ Feature: View Project With Only SonarQube Repository
          Then I see project name with <PVS_react_2>
           And I see the chart title <Code Smells>, the number of SonarQube type, and the <Code Smells> chart
 
-    Scenario: User view Github Duplications chart
+    Scenario: User view SonarQube Duplications chart
         Given I click the create project card
           And I fill project name as <PVS_react_2>
           And I fill sonarqube url as <http://140.124.181.143:9000/dashboard?id=pvs-react>
